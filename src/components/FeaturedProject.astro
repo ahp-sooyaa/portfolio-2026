@@ -1,0 +1,83 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Arrow from "./Arrow.astro";
+import { repoLabel } from "../lib/site";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+const { title, summary, tags, liveUrl, repoUrl, highlights = [], hasDetail } = project.data;
+
+// Primary action: the case study once it exists, otherwise the live site, otherwise the repo.
+const primary = hasDetail
+  ? { href: `/projects/${project.id}`, label: "Read the case study", arrow: "right" as const }
+  : liveUrl
+    ? { href: liveUrl, label: "Live site", arrow: "up-right" as const }
+    : { href: repoUrl!, label: repoLabel(repoUrl!), arrow: "up-right" as const };
+const secondary = [
+  liveUrl && primary.href !== liveUrl && { href: liveUrl, label: "Live site" },
+  repoUrl && primary.href !== repoUrl && { href: repoUrl, label: repoLabel(repoUrl) },
+].filter((link): link is { href: string; label: string } => Boolean(link));
+---
+
+<article class="grid overflow-hidden rounded-3xl border border-line-2 bg-surface lg:grid-cols-2">
+  <div class="flex min-w-0 flex-col gap-5 p-7 sm:p-10">
+    <ul class="m-0 flex list-none flex-wrap gap-2 p-0 font-mono text-xs">
+      <li class="rounded-md bg-accent px-2.5 py-1 font-medium text-on-accent">Featured</li>
+      {tags.map((tag) => <li class="rounded-md border border-line-3 px-2.5 py-1 text-ink-3">{tag}</li>)}
+    </ul>
+    <h3 class="m-0 font-display text-[clamp(34px,4vw,52px)] leading-none font-extrabold tracking-[-0.03em]">
+      {title}
+    </h3>
+    <p class="m-0 text-lg text-pretty text-ink-3">{summary}</p>
+    <div class="flex flex-wrap items-center gap-x-6 gap-y-3">
+      <a
+        href={primary.href}
+        class="inline-flex min-h-12 items-center gap-2.5 rounded-full bg-accent px-[22px] font-semibold text-on-accent no-underline transition-[filter] hover:brightness-105"
+      >
+        {primary.label}<span class="sr-only"> for {title}</span>
+        <Arrow direction={primary.arrow} />
+      </a>
+      {
+        secondary.map((link) => (
+          <a
+            href={link.href}
+            class="inline-flex min-h-11 items-center gap-2 font-medium text-ink-3 no-underline transition-colors hover:text-ink"
+          >
+            {link.label}
+            <span class="sr-only"> for {title}</span>
+            <Arrow size={14} />
+          </a>
+        ))
+      }
+    </div>
+  </div>
+  {
+    highlights.length > 0 && (
+      <div class="flex min-w-0 flex-col justify-center border-t border-line-2 bg-surface-2 p-7 sm:p-10 lg:border-t-0 lg:border-l">
+        <ol class="m-0 flex list-none flex-col gap-3.5 p-0 font-mono text-sm" aria-label={`${title} workflow`}>
+          {highlights.map((step, i) => {
+            const last = i === highlights.length - 1;
+            return (
+              <li class="flex items-center gap-3.5">
+                <span aria-hidden="true" class:list={["w-9 shrink-0", last ? "text-accent-ink" : "text-subtle"]}>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span
+                  class:list={[
+                    "flex-1 rounded-[10px] border bg-ground px-4 py-3",
+                    last ? "border-accent-ink text-accent-ink" : "border-line-3",
+                  ]}
+                >
+                  {step}
+                </span>
+              </li>
+            );
+          })}
+        </ol>
+      </div>
+    )
+  }
+</article>

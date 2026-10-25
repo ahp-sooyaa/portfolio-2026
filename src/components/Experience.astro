@@ -1,0 +1,55 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { formatYearMonth } from "../lib/site";
+
+interface Props {
+  heading: string;
+  intro: string;
+  items: CollectionEntry<"experience">[];
+}
+
+const { heading, intro, items } = Astro.props;
+---
+
+<section
+  id="experience"
+  aria-labelledby="experience-heading"
+  class="container-page flex flex-wrap gap-12 py-20 sm:py-24"
+>
+  <div class="flex min-w-0 flex-[1_1_300px] flex-col gap-3">
+    <span class="font-mono text-[13px] text-accent-ink">02 / Experience</span>
+    <h2 id="experience-heading" class="section-heading">{heading}</h2>
+    <p class="mt-2 mb-0 max-w-[340px] text-muted">{intro}</p>
+  </div>
+  <ol class="m-0 flex min-w-0 flex-[999_1_560px] list-none flex-col p-0">
+    {
+      items.map(({ data }) => {
+        const current = !data.end;
+        return (
+          <li class="flex flex-wrap gap-x-8 gap-y-2 border-t border-line-2 py-8 last:border-b">
+            <span class:list={["basis-[180px] pt-1.5 font-mono text-[13px]", current ? "text-accent-ink" : "text-muted"]}>
+              <time datetime={data.start}>{formatYearMonth(data.start)}</time> —{" "}
+              {data.end ? <time datetime={data.end}>{formatYearMonth(data.end)}</time> : "Present"}
+            </span>
+            <div class="flex min-w-0 flex-[1_1_320px] flex-col gap-2">
+              <h3 class="m-0 font-display text-[26px] leading-[1.2] font-semibold tracking-[-0.02em]">
+                {data.role} <span class="font-normal text-subtle">at</span>{" "}
+                {data.companyUrl ? (
+                  <a
+                    href={data.companyUrl}
+                    class="underline decoration-underline underline-offset-4 transition-colors hover:decoration-ink"
+                  >
+                    {data.company}
+                  </a>
+                ) : (
+                  data.company
+                )}
+              </h3>
+              <p class="m-0 text-ink-4">{data.description}</p>
+            </div>
+          </li>
+        );
+      })
+    }
+  </ol>
+</section>

@@ -1,0 +1,46 @@
+---
+import Arrow from "./Arrow.astro";
+
+interface Props {
+  email: string;
+  socials: { label: string; url: string }[];
+}
+
+const { email, socials } = Astro.props;
+---
+
+<section
+  id="contact"
+  aria-labelledby="contact-heading"
+  class="container-page flex flex-col gap-10 pt-24 pb-20 sm:pt-32 sm:pb-24"
+>
+  <span class="font-mono text-[13px] text-accent-ink">04 / Contact</span>
+  <h2
+    id="contact-heading"
+    class="m-0 font-display text-[clamp(44px,8vw,120px)] leading-[0.95] font-extrabold tracking-[-0.045em] text-balance"
+  >
+    Let's build<br />something <span class="text-accent-ink">good.</span>
+  </h2>
+  <a
+    href={`mailto:${email}`}
+    class="inline-flex min-h-16 max-w-full items-center gap-4 self-start rounded-full bg-accent px-6 font-display text-[clamp(18px,2.4vw,28px)] font-semibold tracking-[-0.01em] break-all text-on-accent no-underline transition-[filter] hover:brightness-105 sm:px-8"
+  >
+    <span class="sr-only">Email </span>{email}
+    <Arrow size={24} />
+  </a>
+  <ul class="m-0 flex list-none flex-wrap gap-3 p-0">
+    {
+      socials.map((social) => (
+        <li>
+          <a
+            href={social.url}
+            rel="me"
+            class="inline-flex min-h-12 items-center rounded-full border border-line-4 px-5 font-mono text-sm no-underline transition-colors hover:border-ink"
+          >
+            {social.label} <span aria-hidden="true">&nbsp;↗</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>

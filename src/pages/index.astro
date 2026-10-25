@@ -1,0 +1,41 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import Facts from "../components/Facts.astro";
+import Work from "../components/Work.astro";
+import Experience from "../components/Experience.astro";
+import Stack from "../components/Stack.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+import { getExperience, getProfile, getProjects } from "../lib/site";
+
+const profile = await getProfile();
+const projects = await getProjects();
+const experience = await getExperience();
+const github = profile.socials.find((s) => s.label === "GitHub");
+---
+
+<BaseLayout>
+  <Header handle={profile.handle} />
+  <main id="main">
+    <Hero
+      name={profile.name}
+      role={profile.role}
+      company={profile.company}
+      badges={profile.badges}
+      bio={profile.bio}
+      githubUrl={github?.url}
+    />
+    <Facts facts={profile.facts} />
+    <Work heading={profile.sections.work.heading} intro={profile.sections.work.intro} projects={projects} />
+    <Experience
+      heading={profile.sections.experience.heading}
+      intro={profile.sections.experience.intro}
+      items={experience}
+    />
+    <Stack heading={profile.sections.stack.heading} stack={profile.stack} learning={profile.learning} />
+    <Contact email={profile.email} socials={profile.socials} />
+  </main>
+  <Footer name={profile.name} />
+</BaseLayout>

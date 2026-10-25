@@ -1,0 +1,16 @@
+---
+interface Props {
+  name: string;
+  base?: string;
+}
+
+const { name, base = "" } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-line">
+  <div class="container-page flex flex-wrap justify-between gap-3 py-7 font-mono text-[13px] text-subtle">
+    <span>© {year} {name}</span>
+    <a href={`${base}#top`} class="text-muted no-underline transition-colors hover:text-ink">Back to top ↑</a>
+  </div>
+</footer>

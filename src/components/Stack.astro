@@ -1,0 +1,55 @@
+---
+interface Props {
+  heading: string;
+  stack: { group: string; items: string[] }[];
+  learning: { title: string; detail: string }[];
+}
+
+const { heading, stack, learning } = Astro.props;
+---
+
+<section id="stack" aria-labelledby="stack-heading" class="border-t border-line bg-ground-alt">
+  <div class="container-page flex flex-col gap-12 py-20 sm:py-24">
+    <div class="flex flex-col gap-3">
+      <span class="font-mono text-[13px] text-accent-ink">03 / Stack</span>
+      <h2 id="stack-heading" class="section-heading">{heading}</h2>
+    </div>
+
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(min(260px,100%),1fr))] gap-5">
+      {
+        stack.map(({ group, items }) => (
+          <div class="flex flex-col gap-4 rounded-[20px] border border-line-2 bg-ground p-7">
+            <h3 class="m-0 font-mono text-[13px] font-medium tracking-[0.08em] text-muted uppercase">{group}</h3>
+            <ul class="m-0 flex list-none flex-wrap gap-2 p-0">
+              {items.map((item) => (
+                <li class="rounded-full border border-line-3 px-3.5 py-1.5 text-[15px] leading-snug">{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    {
+      learning.length > 0 && (
+        <div class="flex flex-wrap items-start gap-x-12 gap-y-6 rounded-[20px] border border-dashed border-line-4 p-8">
+          <div class="flex basis-[220px] flex-col gap-1.5">
+            <span class="inline-flex items-center gap-2 font-mono text-[13px] text-accent-ink">
+              <span aria-hidden="true" class="size-2 rounded-full bg-accent" />
+              Currently learning
+            </span>
+            <h3 class="m-0 font-display text-[26px] leading-[1.15] font-semibold tracking-[-0.02em]">Going deeper</h3>
+          </div>
+          <ul class="m-0 grid min-w-0 flex-[1_1_420px] list-none grid-cols-[repeat(auto-fit,minmax(min(240px,100%),1fr))] gap-x-8 gap-y-4 p-0 text-ink-3">
+            {learning.map((item) => (
+              <li class="flex flex-col gap-0.5">
+                <strong class="font-semibold text-ink">{item.title}</strong>
+                <span>{item.detail}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+  </div>
+</section>

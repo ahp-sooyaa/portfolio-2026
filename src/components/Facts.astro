@@ -1,0 +1,20 @@
+---
+interface Props {
+  facts: { label: string; value: string }[];
+}
+
+const { facts } = Astro.props;
+---
+
+<section aria-label="At a glance" class="border-y border-line bg-ground-alt">
+  <dl class="container-page m-0 grid grid-cols-[repeat(auto-fit,minmax(min(240px,100%),1fr))]">
+    {
+      facts.map((fact) => (
+        <div class="flex flex-col gap-1 py-7 pr-6">
+          <dt class="eyebrow">{fact.label}</dt>
+          <dd class="m-0 font-display text-[32px] leading-tight font-semibold tracking-[-0.02em]">{fact.value}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</section>

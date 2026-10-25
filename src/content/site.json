@@ -1,0 +1,48 @@
+{
+  "profile": {
+    "name": "Aung Htet Paing",
+    "handle": "aunghtetpaing",
+    "title": "Aung Htet Paing — Web Developer",
+    "description": "Web developer at Clickr with about 4.5 years of experience building content-heavy websites on WordPress, Drupal, Sitefinity and SharePoint, plus full-stack side projects with Laravel, Next.js and TypeScript.",
+    "role": "Web Developer",
+    "company": { "label": "Clickr", "url": "https://www.clickrmedia.com" },
+    "badges": ["Chiang Mai · UTC+7", "From Myanmar"],
+    "bio": "I'm a web developer with about 4.5 years of experience. I build and look after content-heavy websites on WordPress, Drupal, Sitefinity and SharePoint. In my own time I build full-stack apps with Laravel, Next.js and TypeScript.",
+    "facts": [
+      { "label": "Building for the web since", "value": "2022" },
+      { "label": "Day job", "value": "CMS & EDMs" },
+      { "label": "Side projects", "value": "Full-stack apps" },
+      { "label": "Studied", "value": "NCC HND" }
+    ],
+    "email": "apaing894@gmail.com",
+    "twitterHandle": "@aunghte23771311",
+    "socials": [
+      { "label": "GitHub", "url": "https://github.com/ahp-sooyaa" },
+      { "label": "LinkedIn", "url": "https://www.linkedin.com/in/aung-htet-paing-852380191/" },
+      { "label": "X", "url": "https://x.com/aunghte23771311" },
+      { "label": "Laracasts", "url": "https://laracasts.com/@AungHtetPaing__" }
+    ],
+    "sections": {
+      "work": {
+        "heading": "Things I've built",
+        "intro": "Side projects from the last few years, from internal tools to dev utilities. All of them are on GitHub."
+      },
+      "experience": {
+        "heading": "Where I've worked",
+        "intro": "Agency CMS work today, with a background in custom Laravel e-commerce."
+      },
+      "stack": { "heading": "Tools I work with" }
+    },
+    "stack": [
+      { "group": "CMS", "items": ["WordPress", "Drupal", "Sitefinity", "SharePoint", "Sanity"] },
+      { "group": "Backend", "items": ["PHP", "Laravel", "Livewire", "Inertia", "better-auth", "Bun"] },
+      { "group": "Frontend", "items": ["TypeScript", "React", "Next.js", "Vue", "Alpine.js", "Tailwind CSS", "Astro"] },
+      { "group": "Data & tooling", "items": ["PostgreSQL", "MySQL", "Drizzle ORM", "Supabase", "Git", "Stripo", "Mailchimp"] }
+    ],
+    "learning": [
+      { "title": "Web security", "detail": "TryHackMe Jr Penetration Tester path" },
+      { "title": "Next.js architecture", "detail": "Server Components, DTO/DAL layers, 'use cache'" },
+      { "title": "Project structure", "detail": "Feature-Sliced Design" }
+    ]
+  }
+}

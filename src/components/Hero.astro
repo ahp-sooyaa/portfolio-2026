@@ -1,0 +1,58 @@
+---
+import Arrow from "./Arrow.astro";
+
+interface Props {
+  name: string;
+  role: string;
+  company: { label: string; url: string };
+  badges: string[];
+  bio: string;
+  githubUrl?: string;
+}
+
+const { name, role, company, badges, bio, githubUrl } = Astro.props;
+
+// "Aung Htet Paing" → "Aung Htet" + "Paing." (last word in the accent colour)
+const words = name.trim().split(/\s+/);
+const lastName = words.pop();
+const firstNames = words.join(" ");
+---
+
+<section class="container-page flex flex-col gap-10 pt-16 pb-14 sm:pt-24 sm:pb-[72px]">
+  <ul class="m-0 flex list-none flex-wrap gap-2.5 p-0 font-mono text-[13px] text-muted">
+    <li class="inline-flex items-center gap-2 rounded-full border border-line-3 px-3.5 py-1.5">
+      <span aria-hidden="true" class="size-2 rounded-full bg-accent"></span>{role} at {company.label}
+    </li>
+    {badges.map((badge) => <li class="rounded-full border border-line-3 px-3.5 py-1.5">{badge}</li>)}
+  </ul>
+
+  <h1
+    class="m-0 font-display text-[clamp(56px,10.5vw,156px)] leading-[0.9] font-extrabold tracking-[-0.045em] text-balance"
+  >
+    {firstNames}<br /><span class="text-accent-ink">{lastName}.</span>
+  </h1>
+
+  <div class="flex flex-wrap items-end justify-between gap-x-16 gap-y-8">
+    <p class="m-0 max-w-[620px] text-[clamp(19px,2vw,24px)] leading-normal text-pretty text-ink-2">{bio}</p>
+    <div class="flex flex-wrap gap-3">
+      <a
+        href="#work"
+        class="inline-flex min-h-[52px] items-center gap-2.5 rounded-full bg-accent px-6 font-semibold text-on-accent no-underline transition-[filter] hover:brightness-105"
+      >
+        See selected work
+        <Arrow direction="down" size={18} />
+      </a>
+      {
+        githubUrl && (
+          <a
+            href={githubUrl}
+            class="inline-flex min-h-[52px] items-center gap-2.5 rounded-full border border-line-4 px-6 font-medium no-underline transition-colors hover:border-ink"
+          >
+            GitHub
+            <Arrow />
+          </a>
+        )
+      }
+    </div>
+  </div>
+</section>

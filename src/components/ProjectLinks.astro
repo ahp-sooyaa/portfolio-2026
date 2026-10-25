@@ -1,0 +1,35 @@
+---
+import Arrow from "./Arrow.astro";
+import { repoLabel } from "../lib/site";
+
+interface Props {
+  liveUrl?: string;
+  repoUrl?: string;
+  title: string;
+}
+
+const { liveUrl, repoUrl, title } = Astro.props;
+---
+
+<div class="flex flex-wrap gap-x-6">
+  {
+    liveUrl && (
+      <a
+        href={liveUrl}
+        class="inline-flex min-h-11 items-center gap-2 font-medium no-underline transition-colors hover:text-accent-ink"
+      >
+        Live site<span class="sr-only"> for {title}</span> <Arrow size={14} />
+      </a>
+    )
+  }
+  {
+    repoUrl && (
+      <a
+        href={repoUrl}
+        class="inline-flex min-h-11 items-center gap-2 font-medium no-underline transition-colors hover:text-accent-ink"
+      >
+        {repoLabel(repoUrl)}<span class="sr-only"> for {title}</span> <Arrow size={14} />
+      </a>
+    )
+  }
+</div>

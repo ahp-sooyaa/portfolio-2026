@@ -1,0 +1,28 @@
+[
+  {
+    "id": "clickr-web-developer",
+    "company": "Clickr",
+    "companyUrl": "https://www.clickrmedia.com",
+    "role": "Web Developer",
+    "start": "2024-01",
+    "description": "I maintain and develop client websites on Sitefinity, WordPress, Drupal and SharePoint, and I build and optimise email campaigns (EDMs) in Stripo."
+  },
+  {
+    "id": "clickr-junior-web-developer",
+    "company": "Clickr",
+    "companyUrl": "https://www.clickrmedia.com",
+    "role": "Junior Web Developer",
+    "start": "2023-05",
+    "end": "2024-01",
+    "description": "Front-end development: I turned designs into clean, responsive HTML and fixed UI/UX issues. I also managed content, QA and maintenance on Sitefinity and Drupal sites."
+  },
+  {
+    "id": "myint-thu-kha-nadi-junior-web-developer",
+    "company": "Myint Thu Kha Nadi",
+    "companyUrl": "https://myintthukhanadi.com",
+    "role": "Junior Web Developer",
+    "start": "2022-01",
+    "end": "2023-05",
+    "description": "I built custom e-commerce sites with Laravel, Jetstream, Livewire, Tailwind and Alpine: authentication, product catalogues, carts and order management. I also made a custom Tailwind WordPress theme and worked directly with clients on their requirements."
+  }
+]

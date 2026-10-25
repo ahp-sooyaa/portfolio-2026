@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Light theme (default) */
+:root {
+  color-scheme: light;
+  --ground: #f7f6f0;
+  --ground-alt: #efeee6;
+  --surface: #ffffff;
+  --surface-2: #f2f1ea;
+  --header: rgb(247 246 240 / 0.85);
+  --dot: rgb(21 22 15 / 0.07);
+  --line: #e2e1d7;
+  --line-2: #dcdbd0;
+  --line-3: #cfcec2;
+  --line-4: #bdbcaf;
+  --ink: #15160f;
+  --ink-2: #2e2f27;
+  --ink-3: #3b3c33;
+  --ink-4: #47483f;
+  --muted: #5a5a50;
+  --subtle: #66665b;
+  --underline: #a9a89c;
+  --accent: #c8f169;
+  --accent-ink: #4a6800;
+  --on-accent: #0e0f0b;
+}
+
+/* Dark theme: the design's palette. Applies when chosen, or when the OS prefers dark and no choice is stored. */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    color-scheme: dark;
+    --ground: #0e0f0b;
+    --ground-alt: #12130e;
+    --surface: #14150f;
+    --surface-2: #191a13;
+    --header: rgb(14 15 11 / 0.85);
+    --dot: rgb(237 236 228 / 0.06);
+    --line: #26271f;
+    --line-2: #2a2b22;
+    --line-3: #34352b;
+    --line-4: #3a3b30;
+    --ink: #edece4;
+    --ink-2: #d4d3ca;
+    --ink-3: #c9c8be;
+    --ink-4: #b8b7ac;
+    --muted: #a3a296;
+    --subtle: #8c8b80;
+    --underline: #4a4b3f;
+    --accent: #c8f169;
+    --accent-ink: #c8f169;
+    --on-accent: #0e0f0b;
+  }
+}
+
+:root.dark {
+  color-scheme: dark;
+  --ground: #0e0f0b;
+  --ground-alt: #12130e;
+  --surface: #14150f;
+  --surface-2: #191a13;
+  --header: rgb(14 15 11 / 0.85);
+  --dot: rgb(237 236 228 / 0.06);
+  --line: #26271f;
+  --line-2: #2a2b22;
+  --line-3: #34352b;
+  --line-4: #3a3b30;
+  --ink: #edece4;
+  --ink-2: #d4d3ca;
+  --ink-3: #c9c8be;
+  --ink-4: #b8b7ac;
+  --muted: #a3a296;
+  --subtle: #8c8b80;
+  --underline: #4a4b3f;
+  --accent: #c8f169;
+  --accent-ink: #c8f169;
+  --on-accent: #0e0f0b;
+}
+
+@theme inline {
+  --color-ground: var(--ground);
+  --color-ground-alt: var(--ground-alt);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-header: var(--header);
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+  --color-line-3: var(--line-3);
+  --color-line-4: var(--line-4);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-ink-4: var(--ink-4);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-underline: var(--underline);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-on-accent: var(--on-accent);
+
+  --font-sans: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-bricolage), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 0;
+  }
+
+  @media (width >= 40rem) {
+    html {
+      scroll-padding-top: 84px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--ground);
+    background-image: radial-gradient(var(--dot) 1px, transparent 1px);
+    background-size: 28px 28px;
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent-ink);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@utility container-page {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--subtle);
+}
+
+@utility section-heading {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(40px, 5.5vw, 72px);
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
