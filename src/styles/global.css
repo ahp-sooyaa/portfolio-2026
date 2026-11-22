@@ -167,3 +167,139 @@
   line-height: 1;
   letter-spacing: -0.035em;
 }
+
+/* Long-form Markdown on case study pages (src/pages/projects/[slug].astro). */
+@layer components {
+  .case-study {
+    max-width: 720px;
+    color: var(--ink-2);
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  .case-study > :first-child {
+    margin-top: 0;
+  }
+
+  .case-study :where(p, ul, ol, blockquote, pre, figure, table) {
+    margin: 0 0 1.25em;
+  }
+
+  .case-study :where(h2) {
+    margin: 2.4em 0 0.6em;
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.2vw, 36px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+  }
+
+  .case-study :where(h3) {
+    margin: 1.8em 0 0.5em;
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 650;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+
+  .case-study :where(strong) {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .case-study :where(a) {
+    color: var(--ink);
+    text-decoration-color: var(--underline);
+    text-underline-offset: 3px;
+  }
+
+  .case-study :where(a:hover) {
+    color: var(--accent-ink);
+    text-decoration-color: currentColor;
+  }
+
+  .case-study :where(ul, ol) {
+    padding-left: 1.3em;
+  }
+
+  .case-study :where(ul) {
+    list-style: disc;
+  }
+
+  .case-study :where(ol) {
+    list-style: decimal;
+  }
+
+  .case-study :where(li) {
+    margin: 0.35em 0;
+  }
+
+  .case-study :where(li::marker) {
+    color: var(--subtle);
+  }
+
+  .case-study :where(blockquote) {
+    padding: 0.2em 0 0.2em 1.1em;
+    border-left: 3px solid var(--accent);
+    color: var(--ink-3);
+  }
+
+  .case-study :where(code) {
+    font-family: var(--font-mono);
+    font-size: 0.86em;
+  }
+
+  .case-study :where(:not(pre) > code) {
+    padding: 0.12em 0.4em;
+    border: 1px solid var(--line-2);
+    border-radius: 6px;
+    background: var(--surface-2);
+  }
+
+  .case-study :where(pre) {
+    overflow-x: auto;
+    padding: 18px 20px;
+    border: 1px solid var(--line-2);
+    border-radius: 14px;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .case-study :where(img) {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--line-2);
+    border-radius: 14px;
+  }
+
+  .case-study :where(hr) {
+    margin: 2.5em 0;
+    border: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .case-study :where(table) {
+    display: block;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: 16px;
+  }
+
+  .case-study :where(th, td) {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line-2);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .case-study :where(th) {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--subtle);
+  }
+}

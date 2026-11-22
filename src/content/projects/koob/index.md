@@ -5,6 +5,8 @@ thumbnail:
   src: ./thumbnail.webp
   alt: Koob home page with a "Get your favorite book with best price" banner over a photo of a market table full of notebooks
 tags: [Laravel 8, Vue 3, Inertia, Stripe]
-repoUrl: https://github.com/ahp-sooyaa
-order: 4
+repoUrl: https://github.com/ahp-sooyaa/koob
+featured: false
+layout: list
+order: 8
 ---

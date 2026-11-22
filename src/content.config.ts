@@ -31,8 +31,12 @@ const projects = defineCollection({
         highlights: z.array(z.string()).optional(),
         order: z.number(),
         date: z.coerce.date().optional(),
-        // Set when a /projects/[slug] page exists for this project.
+        // Set when the Markdown body holds a case study, published at /projects/[slug].
         hasDetail: z.boolean().default(false),
+        // Quick facts shown at the top of a case study.
+        role: z.string().optional(),
+        timeframe: z.string().optional(),
+        status: z.enum(["live", "released", "in-progress", "archived"]).optional(),
       })
       .refine((p) => p.liveUrl || p.repoUrl, { message: "Add a liveUrl or repoUrl" }),
 });

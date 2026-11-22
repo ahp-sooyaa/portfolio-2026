@@ -22,13 +22,15 @@ All content lives in `src/content/` and is checked by the Zod schemas in `src/co
   - `featured: true` shows the large card. `highlights` fills its step panel.
   - `layout: card` (the default) puts it in the grid. `layout: list` puts it under "More experiments".
   - `order` sets the order. Each project needs a `liveUrl` or a `repoUrl`.
-  - `thumbnail` is optional (`src` and the required `alt`). The home page design doesn't show thumbnails yet. They're stored for the detail pages.
+  - `thumbnail` is optional (`src` and the required `alt`). Cards and case study pages show it; a 1600×900 WebP works well.
 
-### Adding project detail pages later
+### Case studies
 
-1. Write the case study in the project's `index.md` body.
-2. Set `hasDetail: true`. The featured card then links to "Read the case study".
-3. Add `src/pages/projects/[slug].astro` using `getStaticPaths()` over `getCollection("projects", (p) => p.data.hasDetail)` and `render(entry)`.
+1. Write the case study in the project's `index.md` body (Markdown; styled by `.case-study` in `global.css`).
+2. Set `hasDetail: true`. It's published at `/projects/<slug>`, and the featured button or card links to it.
+3. Optionally add `role`, `timeframe` and `status` (`live`, `released`, `in-progress`, `archived`) for the quick-facts row.
+
+The page is `src/pages/projects/[slug].astro`; previous/next links follow `order`.
 
 ## Deploying (manual steps)
 

@@ -1,6 +1,8 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import FeaturedProject from "./FeaturedProject.astro";
+import { Image } from "astro:assets";
+import Arrow from "./Arrow.astro";
 import ProjectLinks from "./ProjectLinks.astro";
 
 interface Props {
@@ -30,15 +32,36 @@ const rows = projects.filter((p) => !p.data.featured && p.data.layout === "list"
   {
     cards.length > 0 && (
       <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(340px,100%),1fr))] gap-5 p-0">
-        {cards.map(({ data }) => (
-          <li class="flex flex-col gap-4 rounded-[20px] border border-line-2 bg-surface p-8">
-            <p class="m-0 font-mono text-xs text-subtle">
-              <span class="sr-only">Built with </span>
-              {data.tags.join(" · ")}
-            </p>
-            <h3 class="m-0 font-display text-[28px] leading-[1.1] font-semibold tracking-[-0.02em]">{data.title}</h3>
-            <p class="m-0 flex-1 text-ink-4">{data.summary}</p>
-            <ProjectLinks title={data.title} liveUrl={data.liveUrl} repoUrl={data.repoUrl} />
+        {cards.map(({ id, data }) => (
+          <li class="flex flex-col overflow-hidden rounded-[20px] border border-line-2 bg-surface">
+            {data.thumbnail && (
+              <Image
+                src={data.thumbnail.src}
+                alt={data.thumbnail.alt}
+                widths={[400, 700]}
+                sizes="(min-width: 1100px) 560px, 100vw"
+                class="aspect-[16/9] w-full border-b border-line-2 bg-surface-2 object-cover object-top"
+              />
+            )}
+            <div class="flex flex-1 flex-col gap-4 p-8">
+              <p class="m-0 font-mono text-xs text-subtle">
+                <span class="sr-only">Built with </span>
+                {data.tags.join(" · ")}
+              </p>
+              <h3 class="m-0 font-display text-[28px] leading-[1.1] font-semibold tracking-[-0.02em]">{data.title}</h3>
+              <p class="m-0 flex-1 text-ink-4">{data.summary}</p>
+              <div class="flex flex-wrap gap-x-6">
+                {data.hasDetail && (
+                  <a
+                    href={`/projects/${id}`}
+                    class="inline-flex min-h-11 items-center gap-2 font-semibold text-accent-ink no-underline transition-colors hover:text-ink"
+                  >
+                    Case study<span class="sr-only"> for {data.title}</span> <Arrow direction="right" size={14} />
+                  </a>
+                )}
+                <ProjectLinks title={data.title} liveUrl={data.liveUrl} repoUrl={data.repoUrl} />
+              </div>
+            </div>
           </li>
         ))}
       </ul>

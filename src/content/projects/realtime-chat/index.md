@@ -5,7 +5,8 @@ thumbnail:
   src: ./thumbnail.webp
   alt: Chat app dashboard listing a group chat and two friends with their latest messages
 tags: [Laravel, Vue, Pusher]
-repoUrl: https://github.com/ahp-sooyaa
+repoUrl: https://github.com/ahp-sooyaa/real-time-chat-app
+featured: false
 layout: list
-order: 6
+order: 10
 ---

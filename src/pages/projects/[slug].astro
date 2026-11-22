@@ -1,0 +1,132 @@
+---
+import { Image } from "astro:assets";
+import { render, type CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import Arrow from "../../components/Arrow.astro";
+import ProjectLinks from "../../components/ProjectLinks.astro";
+import { getProfile, getProjects } from "../../lib/site";
+
+export async function getStaticPaths() {
+  const studies = (await getProjects()).filter((p) => p.data.hasDetail);
+  return studies.map((project, i) => ({
+    params: { slug: project.id },
+    props: {
+      project,
+      prev: studies[i - 1],
+      next: studies[i + 1],
+    },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<"projects">;
+  prev?: CollectionEntry<"projects">;
+  next?: CollectionEntry<"projects">;
+}
+
+const { project, prev, next } = Astro.props;
+const { title, summary, tags, liveUrl, repoUrl, thumbnail, role, timeframe, status } = project.data;
+const { Content } = await render(project);
+const profile = await getProfile();
+
+const statusLabel = {
+  live: "Live",
+  released: "Released",
+  "in-progress": "In progress",
+  archived: "Archived",
+};
+
+const facts = [
+  role && { label: "Role", value: role },
+  timeframe && { label: "Timeline", value: timeframe },
+  status && { label: "Status", value: statusLabel[status] },
+  { label: "Stack", value: tags.join(", ") },
+].filter((f): f is { label: string; value: string } => Boolean(f));
+---
+
+<BaseLayout title={`${title}: case study, ${profile.name}`} description={summary}>
+  <Header handle={profile.handle} base="/" />
+  <main id="main" class="container-page flex flex-col gap-12 pt-14 pb-20 sm:pt-20">
+    <a
+      href="/#work"
+      class="inline-flex min-h-11 items-center gap-2 self-start font-mono text-[13px] text-muted no-underline transition-colors hover:text-ink"
+    >
+      <Arrow direction="left" size={14} /> All work
+    </a>
+
+    <header class="flex max-w-[860px] flex-col gap-6">
+      <span class="font-mono text-[13px] text-accent-ink">Case study</span>
+      <h1
+        class="m-0 font-display text-[clamp(44px,7vw,88px)] leading-[0.95] font-extrabold tracking-[-0.04em] text-balance"
+      >
+        {title}
+      </h1>
+      <p class="m-0 text-[clamp(18px,2vw,22px)] text-pretty text-ink-2">{summary}</p>
+      <ProjectLinks title={title} liveUrl={liveUrl} repoUrl={repoUrl} />
+    </header>
+
+    <dl
+      class="m-0 grid grid-cols-[repeat(auto-fit,minmax(min(200px,100%),1fr))] gap-px overflow-hidden rounded-[20px] border border-line-2 bg-line-2"
+    >
+      {
+        facts.map((fact) => (
+          <div class="flex flex-col gap-1.5 bg-surface p-6">
+            <dt class="eyebrow">{fact.label}</dt>
+            <dd class="m-0 font-medium text-ink-2">{fact.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    {
+      thumbnail && (
+        <Image
+          src={thumbnail.src}
+          alt={thumbnail.alt}
+          widths={[600, 1000, 1400]}
+          sizes="(min-width: 1200px) 1152px, 100vw"
+          loading="eager"
+          class="h-auto w-full rounded-[20px] border border-line-2 bg-surface-2"
+        />
+      )
+    }
+
+    <article class="case-study">
+      <Content />
+    </article>
+
+    <nav aria-label="More case studies" class="grid gap-4 border-t border-line pt-8 sm:grid-cols-2">
+      {
+        prev ? (
+          <a
+            href={`/projects/${prev.id}`}
+            class="group flex flex-col gap-1 rounded-[16px] border border-line-2 bg-surface p-6 no-underline"
+          >
+            <span class="eyebrow">Previous</span>
+            <span class="font-display text-[22px] font-semibold transition-colors group-hover:text-accent-ink">
+              {prev.data.title}
+            </span>
+          </a>
+        ) : (
+          <span />
+        )
+      }
+      {
+        next && (
+          <a
+            href={`/projects/${next.id}`}
+            class="group flex flex-col gap-1 rounded-[16px] border border-line-2 bg-surface p-6 text-right no-underline"
+          >
+            <span class="eyebrow">Next</span>
+            <span class="font-display text-[22px] font-semibold transition-colors group-hover:text-accent-ink">
+              {next.data.title}
+            </span>
+          </a>
+        )
+      }
+    </nav>
+  </main>
+  <Footer name={profile.name} />
+</BaseLayout>
