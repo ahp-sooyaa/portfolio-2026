@@ -12,7 +12,7 @@ const { title, summary, tags, liveUrl, repoUrl, highlights = [], hasDetail } = p
 
 // Primary action: the case study once it exists, otherwise the live site, otherwise the repo.
 const primary = hasDetail
-  ? { href: `/projects/${project.id}`, label: "Read the case study", arrow: "right" as const }
+  ? { href: `/projects/${project.id}/`, label: "Read the case study", arrow: "right" as const }
   : liveUrl
     ? { href: liveUrl, label: "Live site", arrow: "up-right" as const }
     : { href: repoUrl!, label: repoLabel(repoUrl!), arrow: "up-right" as const };

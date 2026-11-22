@@ -53,7 +53,7 @@ const rows = projects.filter((p) => !p.data.featured && p.data.layout === "list"
               <div class="flex flex-wrap gap-x-6">
                 {data.hasDetail && (
                   <a
-                    href={`/projects/${id}`}
+                    href={`/projects/${id}/`}
                     class="inline-flex min-h-11 items-center gap-2 font-semibold text-accent-ink no-underline transition-colors hover:text-ink"
                   >
                     Case study<span class="sr-only"> for {data.title}</span> <Arrow direction="right" size={14} />
