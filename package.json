@@ -7,10 +7,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "preview:worker": "astro build && wrangler dev",
-    "deploy": "astro build && wrangler deploy",
+    "preview:pages": "astro build && wrangler pages dev dist",
     "astro": "astro"
   },
+  "packageManager": "pnpm@12.21.0",
   "engines": {
     "node": ">=22.12.0"
   },

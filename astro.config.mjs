@@ -4,8 +4,8 @@ import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 
 // Canonical origin, used for the sitemap, robots.txt and Open Graph URLs.
-// Set SITE_URL (or change the fallback) once the custom domain is live.
-const site = process.env.SITE_URL ?? "https://aunghtetpaing.apaing894.workers.dev";
+// Defaults to the Cloudflare Pages address; set SITE_URL to override it.
+const site = process.env.SITE_URL ?? "https://aunghtetpaing.pages.dev";
 
 // https://astro.build/config
 export default defineConfig({

@@ -1,6 +1,6 @@
 # aunghtetpaing — portfolio
 
-A static, single-page Astro site styled with Tailwind CSS and deployed to Cloudflare Workers Static Assets.
+A static, single-page Astro site styled with Tailwind CSS and hosted on Cloudflare Pages at https://aunghtetpaing.pages.dev.
 
 ## Scripts
 
@@ -9,8 +9,7 @@ A static, single-page Astro site styled with Tailwind CSS and deployed to Cloudf
 | `pnpm dev` | Dev server at http://localhost:4321 |
 | `pnpm build` | Static build to `./dist` |
 | `pnpm preview` | Serves the last build locally |
-| `pnpm preview:worker` | Builds, then serves it through Wrangler like production (404 handling, `_headers`) |
-| `pnpm run deploy` | `astro build && wrangler deploy` |
+| `pnpm preview:pages` | Builds, then serves it through Wrangler the way Pages does (404 handling, `_headers`) |
 
 ## Editing content
 
@@ -32,12 +31,14 @@ All content lives in `src/content/` and is checked by the Zod schemas in `src/co
 
 The page is `src/pages/projects/[slug].astro`; previous/next links follow `order`.
 
-## Deploying (manual steps)
+## Deploying
 
-1. `pnpm wrangler login` (one time, opens the browser).
-2. `pnpm run deploy` (not `pnpm deploy`, which is a built-in pnpm command). The first deploy creates the `aunghtetpaing` Worker and prints its `*.workers.dev` URL.
-3. Custom domain: once the domain's zone is on your Cloudflare account, either add it in the dashboard (Workers & Pages › aunghtetpaing › Settings › Domains & Routes) or uncomment `routes` in `wrangler.jsonc` and deploy again.
-4. Set the canonical URL. Change the fallback in `astro.config.mjs` or build with `SITE_URL=https://your-domain pnpm run deploy`. The sitemap, `robots.txt`, canonical and Open Graph URLs all use it.
-5. Optional: retire the Netlify site, or redirect it to the new domain.
+The Cloudflare Pages project `aunghtetpaing` is connected to this GitHub repo.
+
+- A push to `main` builds and deploys to https://aunghtetpaing.pages.dev.
+- A push to any other branch gets its own preview URL. Pages marks preview URLs `noindex`.
+- Build settings (Workers & Pages › aunghtetpaing › Settings › Build): preset Astro, command `pnpm build`, output `dist`, env `NODE_VERSION=24`. pnpm's version comes from `packageManager` in `package.json`.
+- Web Analytics is turned on in the project's Metrics tab. Cloudflare adds the tracking script itself, so it isn't in the code. It uses no cookies.
+- The canonical URL comes from the fallback in `astro.config.mjs`. The sitemap, `robots.txt`, canonical and Open Graph URLs all use it. To use a custom domain later, add it under the project's Custom domains tab and change that fallback (or set `SITE_URL` in the build settings).
 
 `public/og.png` (1200×630) is the social preview image. Replace it if you change the hero.
