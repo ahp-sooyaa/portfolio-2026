@@ -9,7 +9,11 @@ role: Solo, covering the pipeline, the Mac app and the evaluation tooling
 timeframe: Oct – Nov 2026
 thumbnail:
   src: ./thumbnail.webp
-  alt: "Subgen Mac app showing a finished job: download, caption detection, OCR and translation steps with English and Chinese subtitle files"
+  alt: "subgen viewer playing a Chinese variety show with burned-in captions, the English subtitle \"Let's get started right away.\" underneath and the timed line list beside it"
+video:
+  src: /media/subgen/promo.mp4
+  poster: /media/subgen/promo-poster.jpg
+  title: "subgen promo, 1 minute: from a YouTube link to English subtitles playing over a Chinese variety show"
 ---
 
 ## Overview

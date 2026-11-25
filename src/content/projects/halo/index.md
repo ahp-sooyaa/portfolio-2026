@@ -9,7 +9,7 @@ role: Solo, covering interaction design, build and testing
 timeframe: Oct 2026
 thumbnail:
   src: ./thumbnail.webp
-  alt: "Halo's Convert wheel with PNG, JPG, HEIC, WebP, AVIF and TIFF slices around a centre cancel area"
+  alt: "Halo's Convert wheel open mid-drag, with three photos held over the highlighted WebP slice and PNG, JPG, HEIC, AVIF, TIFF, GIF, BMP and PDF around it"
 ---
 
 ## Overview

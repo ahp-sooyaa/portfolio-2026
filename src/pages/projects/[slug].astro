@@ -27,7 +27,7 @@ interface Props {
 }
 
 const { project, prev, next } = Astro.props;
-const { title, summary, tags, liveUrl, repoUrl, thumbnail, role, timeframe, status } = project.data;
+const { title, summary, tags, liveUrl, repoUrl, thumbnail, video, role, timeframe, status } = project.data;
 const { Content } = await render(project);
 const profile = await getProfile();
 
@@ -81,7 +81,18 @@ const facts = [
     </dl>
 
     {
-      thumbnail && (
+      video ? (
+        <video
+          controls
+          playsinline
+          preload="metadata"
+          poster={video.poster}
+          aria-label={video.title}
+          class="aspect-video h-auto w-full rounded-[20px] border border-line-2 bg-surface-2"
+        >
+          <source src={video.src} type="video/mp4" />
+        </video>
+      ) : thumbnail && (
         <Image
           src={thumbnail.src}
           alt={thumbnail.alt}

@@ -21,6 +21,14 @@ const projects = defineCollection({
             alt: z.string().min(1, "Thumbnail alt text is required"),
           })
           .optional(),
+        // A video for the case study hero, served from public/. Replaces the thumbnail there.
+        video: z
+          .object({
+            src: z.string().startsWith("/"),
+            poster: z.string().startsWith("/").optional(),
+            title: z.string().min(1, "Video title is required"),
+          })
+          .optional(),
         tags: z.array(z.string()).min(1),
         liveUrl: z.url().optional(),
         repoUrl: z.url().optional(),

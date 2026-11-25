@@ -9,7 +9,7 @@ role: Solo, covering interaction design and build
 timeframe: Nov 2026
 thumbnail:
   src: ./thumbnail.webp
-  alt: "NotchFocus opened from the notch: a 24:56 focus countdown ring, phase picker and playback controls"
+  alt: "NotchFocus open under a MacBook notch: an 18:42 focus countdown ring, phase picker, two of four sessions done and playback controls"
 ---
 
 ## Overview
